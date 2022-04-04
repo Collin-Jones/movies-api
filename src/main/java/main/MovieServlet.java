@@ -25,7 +25,7 @@ public class MovieServlet extends HttpServlet {
         try{
             PrintWriter out = response.getWriter();
             String movieString = new Gson().toJson(movies.toArray());
-            System.out.println(movieString);
+            out.println(movieString);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -40,12 +40,13 @@ public class MovieServlet extends HttpServlet {
 
         Movie[] newMovies = new Gson().fromJson(br, Movie[].class);
         for (Movie movie : newMovies){
+            System.out.println(movie);
             movie.setId(nextId++);
             movies.add(movie);
         }
         try{
             PrintWriter out = response.getWriter();
-            System.out.println("Movie(s) added");
+            out.println("Movie(s) added");
         }catch (IOException e){
             e.printStackTrace();
         }
