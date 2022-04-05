@@ -62,7 +62,7 @@ public class Movie {
         this.poster = poster;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
@@ -102,7 +102,7 @@ public class Movie {
         this.actors = actors;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

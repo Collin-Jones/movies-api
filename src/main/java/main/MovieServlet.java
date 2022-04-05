@@ -70,7 +70,29 @@ public class MovieServlet extends HttpServlet {
                 if (newMovie.getRating() != null) {
                     movie.setRating(newMovie.getRating());
                 }
+                if (newMovie.getPoster() != null) {
+                    movie.setPoster(newMovie.getPoster());
+                }
+                if (newMovie.getYear()  != null) {
+                    movie.setYear(newMovie.getYear());
+                }
+                if (newMovie.getGenre()  != null) {
+                    movie.setGenre(newMovie.getGenre());
+                }
+                if (newMovie.getDirector()  != null) {
+                    movie.setDirector(newMovie.getDirector());
+                }
+                if (newMovie.getPlot()  != null) {
+                    movie.setPlot(newMovie.getPlot());
+                }
+                if (newMovie.getActors()  != null) {
+                    movie.setActors(newMovie.getActors());
+                }
+                if (newMovie.getId()  != null) {
+                    movie.setId(newMovie.getId());
+                }
             }
+
         }
 
         PrintWriter out = resp.getWriter();
