@@ -2,14 +2,14 @@ package data;
 
 public class Movie {
     private String title;
-    private int rating;
+    private Integer rating;
     private String poster;
-    private int year;
+    private Integer year;
     private String genre;
     private String director;
     private String plot;
     private String actors;
-    private int id;
+    private Integer id;
 
     public Movie(String title, int rating, String poster, int year, String genre, String director, String plot, String actors, int id) {
         this.title = title;
@@ -46,7 +46,7 @@ public class Movie {
         this.title = title;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
