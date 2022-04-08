@@ -15,7 +15,7 @@ import java.util.List;
 
 public class InMemoryMoviesDao implements MoviesDao {
 
-    private HashMap<Integer, Movie> moviesMap = getMoviesMap();
+    private HashMap<Integer, Movie> moviesMap = new HashMap<>();
 
     @Override
     public List<Movie> all() throws SQLException {
@@ -44,23 +44,37 @@ public class InMemoryMoviesDao implements MoviesDao {
         if (moviesMap != null) {
             moviesMap.replace(movie.getId(), movie);
         }
+//        if (updatedMovie.getTitle() != null) {
+//            movie.setTitle(newMovie.getTitle());
+//        }
+//        if (updatedMovie.getRating() != null) {
+//            movie.setRating(newMovie.getRating());
+//        }
+//        if (updatedMovie.getPoster() != null) {
+//            movie.setPoster(updatedMovie.getPoster());
+//        }
+//        if (updatedMovie.getYear()  != null) {
+//            movie.setYear(updatedMovie.getYear());
+//        }
+//        if (updatedMovie.getGenre()  != null) {
+//            movie.setGenre(updatedMovie.getGenre());
+//        }
+//        if (updatedMovie.getDirector()  != null) {
+//            movie.setDirector(updatedMovie.getDirector());
+//        }
+//        if (updatedMovie.getPlot()  != null) {
+//            movie.setPlot(updatedMovie.getPlot());
+//        }
+//        if (updatedMovie.getActors()  != null) {
+//            movie.setActors(updatedMovie.getActors());
+//        }
+
     }
 
     @Override
     public void delete(int id) throws SQLException {
         if (moviesMap != null) {
             moviesMap.remove(id);
-        }
-    }
-
-    private HashMap<Integer, Movie> getMoviesMap() {
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("/Users/vegetasrevenge/IdeaProjects/movies-backend/src/main/resources/movies.json"));
-            Type type = TypeToken.getParameterized(ArrayList.class, Movie.class).getType();
-            return getMoviesMap(new Gson().fromJson(reader, type));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return null;
         }
     }
 
