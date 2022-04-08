@@ -44,30 +44,6 @@ public class InMemoryMoviesDao implements MoviesDao {
         if (moviesMap != null) {
             moviesMap.replace(movie.getId(), movie);
         }
-//        if (updatedMovie.getTitle() != null) {
-//            movie.setTitle(newMovie.getTitle());
-//        }
-//        if (updatedMovie.getRating() != null) {
-//            movie.setRating(newMovie.getRating());
-//        }
-//        if (updatedMovie.getPoster() != null) {
-//            movie.setPoster(updatedMovie.getPoster());
-//        }
-//        if (updatedMovie.getYear()  != null) {
-//            movie.setYear(updatedMovie.getYear());
-//        }
-//        if (updatedMovie.getGenre()  != null) {
-//            movie.setGenre(updatedMovie.getGenre());
-//        }
-//        if (updatedMovie.getDirector()  != null) {
-//            movie.setDirector(updatedMovie.getDirector());
-//        }
-//        if (updatedMovie.getPlot()  != null) {
-//            movie.setPlot(updatedMovie.getPlot());
-//        }
-//        if (updatedMovie.getActors()  != null) {
-//            movie.setActors(updatedMovie.getActors());
-//        }
 
     }
 
