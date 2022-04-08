@@ -65,6 +65,8 @@ public class InMemoryMoviesDao implements MoviesDao {
         return movieHashMap;
     }
 
+    public void cleanup() {
+    }
 }
 
 

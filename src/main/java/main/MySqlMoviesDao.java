@@ -63,6 +63,12 @@ public class MySqlMoviesDao implements MoviesDao {
     @Override
     public void insert(Movie movie) {
         // TODO: Insert one movie
+        try{
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO movies" +
+                    "(title, year, director, actors, imdbId, poster, genre, plot) ");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void insertAll(Movie[] movies) throws SQLException {
@@ -118,6 +124,15 @@ public class MySqlMoviesDao implements MoviesDao {
         statement.setInt(1, id);
 
         statement.execute();
+    }
+
+    public void cleanUp(){
+        System.out.println("Closing connection");
+        try{
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }
 

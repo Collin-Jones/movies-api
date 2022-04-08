@@ -83,5 +83,9 @@ public class MovieServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
+    @Override
+    public void destroy(){
+        dao.cleanup();
+    }
 }
 
