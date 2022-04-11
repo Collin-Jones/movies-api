@@ -91,7 +91,7 @@ public class MySqlMoviesDao implements MoviesDao {
         // TODO: Insert one movie
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO movies" +
-                    "(title, year, director, actors, imdbId, poster, genre, plot) ");
+                    "(title, year, director, actors, rating, poster, genre, plot) ");
         } catch (SQLException e) {
             e.printStackTrace();
         }
