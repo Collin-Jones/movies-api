@@ -1,4 +1,5 @@
 package main;
+
 import data.Movie;
 import data.MoviesDao;
 
@@ -6,6 +7,7 @@ import java.io.ObjectInputFilter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.mysql.cj.jdbc.Driver;
 
 
@@ -64,17 +66,17 @@ public class MySqlMoviesDao implements MoviesDao {
             ResultSet rs = null;
             rs = statement.executeQuery("SELECT * FROM movies WHERE id = " + id);
             rs.next();
-             findMovie = new Movie(
-                        rs.getString("title"),
-                        rs.getInt("year"),
-                        rs.getString("actors"),
-                        rs.getInt("rating"),
-                        rs.getString("poster"),
-                        rs.getString("genre"),
-                        rs.getString("director"),
-                        rs.getString("plot"),
-                        rs.getInt("id")
-                );
+            findMovie = new Movie(
+                    rs.getString("title"),
+                    rs.getInt("year"),
+                    rs.getString("actors"),
+                    rs.getInt("rating"),
+                    rs.getString("poster"),
+                    rs.getString("genre"),
+                    rs.getString("director"),
+                    rs.getString("plot"),
+                    rs.getInt("id")
+            );
 
 
         } catch (SQLException e) {
@@ -87,7 +89,7 @@ public class MySqlMoviesDao implements MoviesDao {
     @Override
     public void insert(Movie movie) {
         // TODO: Insert one movie
-        try{
+        try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO movies" +
                     "(title, year, director, actors, imdbId, poster, genre, plot) ");
         } catch (SQLException e) {
@@ -135,28 +137,28 @@ public class MySqlMoviesDao implements MoviesDao {
         //TODO: Update a movie here!
         Movie movieToChange = findOne(movie.getId());
 
-        if (movie.getTitle() != null){
+        if (movie.getTitle() != null) {
             movieToChange.setTitle(movie.getTitle());
         }
-        if (movie.getRating() != null){
+        if (movie.getRating() != null) {
             movieToChange.setRating(movie.getRating());
         }
-        if (movie.getPoster() != null){
+        if (movie.getPoster() != null) {
             movieToChange.setPoster(movie.getPoster());
         }
-        if (movie.getYear() != null){
+        if (movie.getYear() != null) {
             movieToChange.setYear(movie.getYear());
         }
-        if (movie.getGenre() != null){
+        if (movie.getGenre() != null) {
             movieToChange.setGenre(movie.getGenre());
         }
-        if (movie.getDirector() != null){
+        if (movie.getDirector() != null) {
             movieToChange.setDirector(movie.getDirector());
         }
-        if (movie.getActors() != null){
+        if (movie.getActors() != null) {
             movieToChange.setActors(movie.getActors());
         }
-        if (movie.getPlot() != null){
+        if (movie.getPlot() != null) {
             movieToChange.setPlot(movie.getPlot());
         }
         StringBuilder sql = new StringBuilder("UPDATE movies SET title = ?, rating = ?, poster = ?, year = ?, genre = ?, director = ?, actors = ?, plot = ? WHERE id = ?");
@@ -180,23 +182,18 @@ public class MySqlMoviesDao implements MoviesDao {
     @Override
     public void delete(int id) throws SQLException {
         //TODO: Annihilate a movie
-
-        String sql =
-                "DELETE FROM movies " +
-                        "WHERE id = ?";
-
-        PreparedStatement statement = connection.prepareStatement(sql);
-
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM movies WHERE id = ?");
         statement.setInt(1, id);
 
-        statement.execute();
+        statement.executeUpdate();
     }
-@Override
-    public void cleanUp(){
+
+    @Override
+    public void cleanUp() {
         System.out.println("Closing connection");
-        try{
+        try {
             connection.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
