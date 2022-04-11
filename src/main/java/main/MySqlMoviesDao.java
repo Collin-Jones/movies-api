@@ -13,7 +13,7 @@ public class MySqlMoviesDao implements MoviesDao {
 
     private Connection connection = null;
 
-    public MySqlMoviesDao(ObjectInputFilter.Config config) {
+    public MySqlMoviesDao() {
         try {
             DriverManager.registerDriver(new Driver());
 
@@ -57,7 +57,31 @@ public class MySqlMoviesDao implements MoviesDao {
     @Override
     public Movie findOne(int id) {
         // TODO: Get one movie by id
-        return null;
+        Movie findMovie = null;
+        try {
+            Statement statement = connection.createStatement();
+
+            ResultSet rs = null;
+            rs = statement.executeQuery("SELECT * FROM movies WHERE id = " + id);
+            rs.next();
+             findMovie = new Movie(
+                        rs.getString("title"),
+                        rs.getInt("year"),
+                        rs.getString("actors"),
+                        rs.getInt("rating"),
+                        rs.getString("poster"),
+                        rs.getString("genre"),
+                        rs.getString("director"),
+                        rs.getString("plot"),
+                        rs.getInt("id")
+                );
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return findMovie;
     }
 
     @Override
@@ -75,7 +99,7 @@ public class MySqlMoviesDao implements MoviesDao {
         // TODO: Insert all the movies!
         // Build sql template
         StringBuilder sql = new StringBuilder("INSERT INTO movies (" +
-                "title, year, director, actors, imdbId, poster, genre, plot) " +
+                "title, year, director, actors, rating, poster, genre, plot) " +
                 "VALUES ");
 
 
@@ -97,11 +121,10 @@ public class MySqlMoviesDao implements MoviesDao {
             statement.setInt((counter * 8) + 2, movie.getYear());
             statement.setString((counter * 8) + 3, movie.getDirector());
             statement.setString((counter * 8) + 4, movie.getActors());
-            statement.setInt((counter * 8) + 5, movie.getId());
+            statement.setInt((counter * 8) + 5, movie.getRating());
             statement.setString((counter * 8) + 6, movie.getPoster());
             statement.setString((counter * 8) + 7, movie.getGenre());
             statement.setString((counter * 8) + 8, movie.getPlot());
-            statement.setInt(9, movie.getRating());
             counter++;
         }
         statement.executeUpdate();
@@ -110,23 +133,47 @@ public class MySqlMoviesDao implements MoviesDao {
     @Override
     public void update(Movie movie) throws SQLException {
         //TODO: Update a movie here!
-//        StringBuilder sql = new StringBuilder("UPDATE movies SET title = ?, rating = ?, poster = ?, year = ?, genre = ?, director = ?, actors = ?, plot = ?, WHERE id = ?");
-//
-//        PreparedStatement statement = connection.prepareStatement(sql.toString());
-//        statement.setString(1, movie.getTitle());
-//        statement.setInt(2, movie.getRating());
-//        statement.setString(3, movie.getDirector());
-//        statement.setString(4, movie.getActors());
-//        statement.setInt(5, movie.getId());
-//        statement.setString(6, movie.getPoster());
-//        statement.setString(7, movie.getGenre());
-//        statement.setString(8, movie.getPlot());
-//        statement.setInt(9, movie.getYear());
-//
-//        statement.executeUpdate(sql.toString());
+        Movie movieToChange = findOne(movie.getId());
 
-        String query = "update movies set";
-        if (movie.getTitle() != null);
+        if (movie.getTitle() != null){
+            movieToChange.setTitle(movie.getTitle());
+        }
+        if (movie.getRating() != null){
+            movieToChange.setRating(movie.getRating());
+        }
+        if (movie.getPoster() != null){
+            movieToChange.setPoster(movie.getPoster());
+        }
+        if (movie.getYear() != null){
+            movieToChange.setYear(movie.getYear());
+        }
+        if (movie.getGenre() != null){
+            movieToChange.setGenre(movie.getGenre());
+        }
+        if (movie.getDirector() != null){
+            movieToChange.setDirector(movie.getDirector());
+        }
+        if (movie.getActors() != null){
+            movieToChange.setActors(movie.getActors());
+        }
+        if (movie.getPlot() != null){
+            movieToChange.setPlot(movie.getPlot());
+        }
+        StringBuilder sql = new StringBuilder("UPDATE movies SET title = ?, rating = ?, poster = ?, year = ?, genre = ?, director = ?, actors = ?, plot = ? WHERE id = ?");
+
+        PreparedStatement statement = connection.prepareStatement(sql.toString());
+        statement.setString(1, movieToChange.getTitle());
+        statement.setInt(2, movieToChange.getRating());
+        statement.setString(3, movieToChange.getPoster());
+        statement.setInt(4, movieToChange.getYear());
+        statement.setString(5, movieToChange.getGenre());
+        statement.setString(6, movieToChange.getDirector());
+        statement.setString(7, movieToChange.getActors());
+        statement.setString(8, movieToChange.getPlot());
+        statement.setInt(9, movieToChange.getId());
+
+        statement.executeUpdate();
+
     }
 
 

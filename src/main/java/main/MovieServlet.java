@@ -22,7 +22,8 @@ import java.util.ArrayList;
 
 public class MovieServlet extends HttpServlet {
 
-    private InMemoryMoviesDao dao = new InMemoryMoviesDao();
+//    private InMemoryMoviesDao dao = new InMemoryMoviesDao();
+    private MySqlMoviesDao dao = new MySqlMoviesDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
