@@ -54,6 +54,11 @@ public class InMemoryMoviesDao implements MoviesDao {
         }
     }
 
+    @Override
+    public void cleanUp() {
+
+    }
+
     private HashMap<Integer, Movie> getMoviesMap(List<Movie> movies) {
         HashMap<Integer, Movie> movieHashMap = new HashMap<>();
         int counter = 1;
@@ -65,8 +70,6 @@ public class InMemoryMoviesDao implements MoviesDao {
         return movieHashMap;
     }
 
-    public void cleanup() {
-    }
 }
 
 

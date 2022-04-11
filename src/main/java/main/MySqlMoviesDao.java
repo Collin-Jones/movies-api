@@ -101,6 +101,7 @@ public class MySqlMoviesDao implements MoviesDao {
             statement.setString((counter * 8) + 6, movie.getPoster());
             statement.setString((counter * 8) + 7, movie.getGenre());
             statement.setString((counter * 8) + 8, movie.getPlot());
+            statement.setInt(9, movie.getRating());
             counter++;
         }
         statement.executeUpdate();
@@ -109,7 +110,25 @@ public class MySqlMoviesDao implements MoviesDao {
     @Override
     public void update(Movie movie) throws SQLException {
         //TODO: Update a movie here!
+//        StringBuilder sql = new StringBuilder("UPDATE movies SET title = ?, rating = ?, poster = ?, year = ?, genre = ?, director = ?, actors = ?, plot = ?, WHERE id = ?");
+//
+//        PreparedStatement statement = connection.prepareStatement(sql.toString());
+//        statement.setString(1, movie.getTitle());
+//        statement.setInt(2, movie.getRating());
+//        statement.setString(3, movie.getDirector());
+//        statement.setString(4, movie.getActors());
+//        statement.setInt(5, movie.getId());
+//        statement.setString(6, movie.getPoster());
+//        statement.setString(7, movie.getGenre());
+//        statement.setString(8, movie.getPlot());
+//        statement.setInt(9, movie.getYear());
+//
+//        statement.executeUpdate(sql.toString());
+
+        String query = "update movies set";
+        if (movie.getTitle() != null);
     }
+
 
     @Override
     public void delete(int id) throws SQLException {
@@ -125,7 +144,7 @@ public class MySqlMoviesDao implements MoviesDao {
 
         statement.execute();
     }
-
+@Override
     public void cleanUp(){
         System.out.println("Closing connection");
         try{

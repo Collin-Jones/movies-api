@@ -17,6 +17,7 @@ import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 @WebServlet(name = "main.MovieServlet", urlPatterns = "/movies/*")
 
 public class MovieServlet extends HttpServlet {
@@ -85,7 +86,7 @@ public class MovieServlet extends HttpServlet {
     }
     @Override
     public void destroy(){
-        dao.cleanup();
+//        dao.cleanup();
     }
 }
 
